@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>รักนะ อิอิ 🌸</title>
+  <link href="https://fonts.googleapis.com/css2?family=Itim&family=Mali:wght@300;500;700&family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <div id="canvasWrapper">
+    <canvas id="background"></canvas>
+    <canvas id="particles"></canvas>
+    </div>
+  
+  <div class="floating-item balloon" style="left: 10%; animation-delay: 0s;">🎈</div>
+  <div class="floating-item heart-float" style="left: 30%; animation-delay: 2s;">💖</div>
+  <div class="floating-item balloon" style="left: 80%; animation-delay: 4s;">🎈</div>
+  <div class="floating-item heart-float" style="left: 60%; animation-delay: 6s;">✨</div>
+  
+  <button id="themeToggle" aria-label="Switch Theme">🌙</button>
+
+  <div id="mainContent">
+    
+    <div class="couple-photo-container">
+       <!-- <img src="https://placehold.co/400x400/ffb3c1/ffffff?text=Our+Photo" alt="Our Photo" id="couplePhoto"> -->
+       <img src="favicon.ico" alt="Our Photo" id="couplePhoto">
+       <div class="photo-decoration"></div>
+    </div>
+
+    <div class="title-wrapper">
+      <h1>Together Since<br><span class="highlight">17 Oct 2023</span> 🌸</h1>
+    </div>
+    
+    <div class="love-card" id="output">
+      <div class="time-header">เรารักกันมานานแล้วนะ ✨</div>
+      <div class="count-up" id="datePart">กำลังคำนวณ...</div>
+      <div class="count-timer" id="timePart">00 : 00 : 00</div>
+      <div class="card-footer">ทุกวินาทีมีความหมาย 💝</div>
+    </div>
+  </div>
+
+  <div id="footerText" class="footer-glow"></div>
+  <div id="heartEffect"></div>
+  
+  <div id="musicPlayer" class="minimized">
+    <div class="player-controls">
+      <button id="musicToggle" class="play-btn">▶</button>
+      <div class="track-info">
+        <span id="songTitle">แตะปุ่ม Play เพื่อเล่นเพลง 🎵</span>
+        <span id="musicTime">00:00 / 00:00</span>
+      </div>
+      <button id="playlistToggle" class="list-btn">📂</button>
+    </div>
+    
+    <div class="player-expandable">
+      <select id="songList">
+        <option value="music/1.mp3">🎧 เพลงที่ 1 - เพลงของเรา</option>
+        <option value="music/2.mp3">🎵 เพลงที่ 2 - รักนะ</option>
+        <option value="music/3.mp3">🎼 เพลงที่ 3 - ตลอดไป</option>
+      </select>
+      <div class="volume-wrapper">
+        <span>🔉</span>
+        <input type="range" id="volumeSlider" min="0" max="100" value="70">
+      </div>
+    </div>
+
+    <audio id="audio" src="music/1.mp3" loop></audio>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
