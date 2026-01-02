@@ -1,428 +1,249 @@
 :root {
-  /* Cute Color Palette */
-  --primary-pink: #ff8fab;
-  --soft-pink: #ffc2d1;
-  --pastel-purple: #e0c3fc;
-  --creamy-white: #fff9fa;
-  --text-color: #5d4a50;
-  --glass-bg: rgba(255, 255, 255, 0.25);
-  --glass-border: rgba(255, 255, 255, 0.6);
-  --shadow-color: rgba(255, 143, 171, 0.3);
-
-  --font-main: 'Mali', cursive;
-  --font-number: 'Itim', cursive;
+    --primary: #ff9a9e;
+    --secondary: #fad0c4;
+    --accent: #a18cd1;
+    --text-color: #5d4a50;
+    --glass-bg: rgba(255, 255, 255, 0.65);
+    --glass-border: rgba(255, 255, 255, 0.9);
+    
+    --font-head: 'Mali', cursive;
+    --font-body: 'Itim', cursive;
 }
 
-/* Dark Theme Overrides */
-body:not(.light) {
-  --text-color: #fff0f5;
-  --glass-bg: rgba(40, 20, 30, 0.4);
-  --glass-border: rgba(255, 255, 255, 0.15);
-  --shadow-color: rgba(0, 0, 0, 0.3);
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-  font-family: var(--font-main);
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: #1a0b1c; /* Fallback */
-  color: var(--text-color);
-  transition: color 0.5s ease;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(120deg, #a18cd1 0%, #fbc2eb 100%);
+    font-family: var(--font-head);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
 
-/* Canvas Backgrounds */
-#canvasWrapper {
-  position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
-  z-index: -2;
-}
-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-
-/* Main Layout */
-#mainContent {
-  position: relative;
-  z-index: 10;
-  text-align: center;
-  width: 90%;
-  max-width: 500px;
-  padding-bottom: 60px; /* Space for footer text */
+#cuteCanvas {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1;
 }
 
-/* Photo Frame (จุดเด่นใหม่) */
-.couple-photo-container {
-  width: 150px;
-  height: 150px;
-  margin: 0 auto 20px;
-  position: relative;
-  z-index: 2;
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 3px solid var(--glass-border);
+    border-radius: 40px;
+    padding: 2.5rem 2rem;
+    width: 85%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(161, 140, 209, 0.3);
+    animation: floatCard 6s ease-in-out infinite;
+    position: relative;
+    z-index: 10;
+}
+
+/* Photo Area */
+.photo-frame {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 1.5rem;
 }
 
 #couplePhoto {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 4px solid white;
-  box-shadow: 0 0 20px var(--shadow-color);
-  animation: floatPhoto 4s ease-in-out infinite;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 6px solid #fff;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 
-.photo-decoration {
-  position: absolute;
-  top: -10px; left: -10px; right: -10px; bottom: -10px;
-  border: 2px dashed var(--primary-pink);
-  border-radius: 50%;
-  animation: spinSlow 20s linear infinite;
-  pointer-events: none;
+.sticker-float {
+    position: absolute;
+    font-size: 2rem;
+    animation: bounce 3s infinite;
+    z-index: 2;
+}
+.st-1 { top: -10px; right: -10px; animation-delay: 0s; }
+.st-2 { bottom: 0px; left: -10px; animation-delay: 1.5s; font-size: 1.5rem; }
+
+.main-title {
+    font-size: 1.6rem;
+    color: #4a4a4a;
+    margin-bottom: 5px;
 }
 
-/* Typography */
-h1 {
-  font-size: 1.5rem;
-  margin-bottom: 15px;
-  text-shadow: 0 2px 4px var(--shadow-color);
-  font-weight: 700;
-}
-
-.highlight {
-  color: var(--primary-pink);
-  background: rgba(255, 255, 255, 0.8);
-  padding: 2px 10px;
-  border-radius: 15px;
-  font-size: 1.8rem;
-  display: inline-block;
-  margin-top: 5px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-/* Love Card (Time Box) */
-.love-card {
-  background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
-  border-radius: 30px;
-  padding: 30px 20px;
-  box-shadow: 0 15px 35px var(--shadow-color);
-  transition: transform 0.3s ease;
-}
-
-.love-card:hover {
-  transform: translateY(-5px);
-}
-
-.time-header {
-  font-size: 1.1rem;
-  margin-bottom: 15px;
-  opacity: 0.9;
-}
-
-.count-up {
-  font-family: var(--font-number);
-  font-size: 1.4rem;
-  color: var(--primary-pink);
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.count-timer {
-  font-family: var(--font-number);
-  font-size: 2.2rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  margin-bottom: 15px;
-  text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
-}
-
-.card-footer {
-  font-size: 0.9rem;
-  opacity: 0.8;
-}
-
-/* Theme Toggle */
-#themeToggle {
-  position: fixed;
-  top: 20px; right: 20px;
-  width: 45px; height: 45px;
-  border-radius: 50%;
-  background: var(--glass-bg);
-  border: 2px solid var(--glass-border);
-  backdrop-filter: blur(5px);
-  font-size: 1.5rem;
-  cursor: pointer;
-  transition: all 0.3s;
-  z-index: 100;
-}
-
-#themeToggle:hover { transform: rotate(15deg) scale(1.1); }
-
-/* Music Player (Capsule Style) */
-#musicPlayer {
-  position: fixed;
-  bottom: 20px; left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  max-width: 350px;
-  background: rgba(255, 255, 255, 0.9); /* Light bg for player always */
-  padding: 10px 15px;
-  border-radius: 50px; /* Capsule shape */
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-  z-index: 100;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  color: #333;
-  border: 2px solid #fff;
-}
-
-/* Dark mode specific for player to keep it readable */
-body:not(.light) #musicPlayer {
-  background: rgba(255, 255, 255, 0.95); 
-}
-
-.player-controls {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-.play-btn, .list-btn {
-  background: var(--primary-pink);
-  color: white;
-  border: none;
-  width: 40px; height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.2rem;
-  transition: transform 0.2s;
-}
-
-.list-btn { background: var(--pastel-purple); }
-.play-btn:active, .list-btn:active { transform: scale(0.9); }
-
-.track-info {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  font-size: 0.8rem;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-#songTitle { font-weight: bold; color: #444; }
-#musicTime { font-size: 0.7rem; color: #888; }
-
-.player-expandable {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease;
-  padding-top: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-#musicPlayer.expanded {
-  border-radius: 25px;
-  bottom: 20px;
-  max-height: 200px; /* Allow expansion */
-}
-
-#musicPlayer.expanded .player-expandable {
-  max-height: 100px;
-  padding-top: 10px;
-  border-top: 1px solid #eee;
-  margin-top: 10px;
-}
-
-#songList {
-  width: 100%;
-  padding: 5px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  font-family: var(--font-main);
-}
-
-.volume-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 1.2rem;
-}
-
-#volumeSlider {
-  flex-grow: 1;
-  accent-color: var(--primary-pink);
-}
-
-/* Floating Items */
-.floating-item {
-  position: fixed;
-  font-size: 2rem;
-  animation: floatUp 15s linear infinite;
-  opacity: 0.6;
-  z-index: -1;
-}
-
-/* Animations */
-@keyframes floatPhoto {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-@keyframes spinSlow {
-  100% { transform: rotate(360deg); }
-}
-
-@keyframes floatUp {
-  0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
-  10% { opacity: 0.8; }
-  90% { opacity: 0.8; }
-  100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-}
-
-/* Footer */
-#footerText {
-  position: fixed;
-  bottom: 10px;
-  right: 15px;
-  font-size: 0.9rem;
-  opacity: 0.7;
-  font-family: var(--font-number);
-  z-index: 50;
-}
-
-/* Mobile Adjustments */
-@media (max-width: 400px) {
-  h1 { font-size: 1.2rem; }
-  .highlight { font-size: 1.4rem; }
-  .count-timer { font-size: 1.8rem; }
-}
-
-@media (max-width: 600px) {
-  
-  /* ปรับ Layout ให้เนื้อหาขยับขึ้นไปด้านบนหน่อย จะได้ไม่เบียด Player */
-  #mainContent {
-    padding-bottom: 120px; /* เผื่อที่ให้ Player ด้านล่าง */
-    width: 95%; /* ให้กว้างเกือบเต็มจอ */
-  }
-
-  /* ย่อรูปคู่ลงนิดหน่อย */
-  .couple-photo-container {
-    width: 120px;
-    height: 120px;
-    margin-bottom: 15px;
-  }
-
-  /* ปรับขนาดตัวอักษรหัวข้อ */
-  h1 {
-    font-size: 1.2rem; /* เล็กลง */
-    line-height: 1.4;
-  }
-
-  .highlight {
-    font-size: 1.4rem;
-    padding: 2px 8px;
-  }
-
-  /* ปรับกล่องเวลา (Love Card) */
-  .love-card {
-    padding: 20px 15px;
-    border-radius: 25px;
-  }
-
-  .time-header {
+.since-date {
+    background: #fff;
+    color: var(--primary);
+    display: inline-block;
+    padding: 4px 15px;
+    border-radius: 20px;
+    font-family: var(--font-body);
     font-size: 1rem;
-  }
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
 
-  .count-up {
-    font-size: 1.2rem;
-  }
+.timer-container {
+    background: rgba(255,255,255,0.5);
+    border-radius: 25px;
+    padding: 15px;
+    border: 2px dashed #fff;
+    margin-bottom: 15px;
+}
 
-  .count-timer {
-    font-size: 1.8rem; /* ตัวเลขเวลาเล็กลงจะได้ไม่ตกบรรทัด */
-    letter-spacing: 1px;
-  }
+.timer-display {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    color: #777;
+}
 
-  /* ปรับเครื่องเล่นเพลงให้เต็มความกว้าง และกดง่ายขึ้น */
-  #musicPlayer {
-    width: 92%;
-    bottom: 15px;
-    padding: 12px 15px;
-    border-radius: 20px; /* ลดความโค้งลงเพื่อให้มีพื้นที่เนื้อหา */
-  }
+.timer-big {
+    font-family: var(--font-body);
+    font-size: 2.2rem;
+    color: var(--primary);
+    font-weight: bold;
+    text-shadow: 2px 2px 0px #fff;
+}
 
-  .play-btn, .list-btn {
-    width: 45px; /* ปุ่มใหญ่ขึ้นเพื่อให้กดง่ายบนทัชสกรีน */
-    height: 45px;
-    font-size: 1.4rem;
-  }
+.typing-area {
+    min-height: 1.5rem;
+    font-size: 1rem;
+    color: #666;
+}
 
-  /* ปรับตัวหนังสือใน Player */
-  #songTitle {
-    font-size: 0.9rem;
-    max-width: 150px; /* จำกัดความกว้างชื่อเพลงไม่ให้ดันปุ่ม */
-    white-space: nowrap;
+.cursor { animation: blink 1s infinite; }
+
+.player-dock {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 380px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    z-index: 100;
+    border: 2px solid #fff;
+}
+
+.player-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
     overflow: hidden;
-    text-overflow: ellipsis;
-  }
+}
 
-  /* ปรับตำแหน่งลูกโป่งตกแต่งไม่ให้บังเนื้อหา */
-  .floating-item {
-    z-index: -1; /* ให้ไปอยู่หลังสุดจริงๆ */
-    opacity: 0.4; /* จางลงหน่อยจะได้ไม่อ่านยาก */
-  }
+.disc-spin {
+    font-size: 1.8rem;
+    animation: spin 4s linear infinite;
+    animation-play-state: paused;
+}
+.playing .disc-spin { animation-play-state: running; }
 
-  /* ย้ายปุ่มเปลี่ยนธีมลงมาหน่อย หลบติ่งหน้าจอ (Notch) */
-  #themeToggle {
-    top: 15px;
-    right: 15px;
-    width: 40px;
-    height: 40px;
-    font-size: 1.2rem;
-  }
-  
-  /* ข้อความ footer ให้เล็กลง */
-  #footerText {
+.song-info {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.song-name {
+    font-size: 0.9rem;
+    font-weight: bold;
+    white-space: nowrap;
+    color: #444;
+}
+
+.song-status {
     font-size: 0.7rem;
-    bottom: 85px; /* ดันขึ้นหนี Player */
-    right: 50%;
-    transform: translateX(50%); /* จัดกึ่งกลาง */
-    width: 100%;
-    text-align: center;
-  }
+    color: var(--primary);
 }
 
-/* สำหรับมือถือจอเล็กมาก (iPhone SE, Galaxy Fold พับ) */
+.player-controls { display: flex; gap: 8px; }
+
+.cute-btn {
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    transition: transform 0.2s;
+}
+
+.main {
+    width: 45px; height: 45px;
+    background: var(--primary);
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(255, 154, 158, 0.4);
+}
+
+.sub {
+    width: 38px; height: 38px;
+    background: #f0f0f0;
+    color: #666;
+}
+
+.cute-btn:active { transform: scale(0.9); }
+
+.playlist-pop {
+    position: absolute;
+    bottom: 75px;
+    left: 0; right: 0;
+    background: rgba(255,255,255,0.95);
+    border-radius: 20px;
+    padding: 15px;
+    display: none;
+    flex-direction: column;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    transform-origin: bottom center;
+}
+.playlist-pop.show { display: flex; animation: popUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+
+.pop-header { font-weight: bold; margin-bottom: 10px; color: var(--primary); }
+
+ul { list-style: none; margin-bottom: 10px; }
+li {
+    padding: 8px 10px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin-bottom: 5px;
+    transition: background 0.2s;
+}
+li:hover { background: #fff0f5; }
+li.active { background: var(--secondary); color: #fff; font-weight: bold; }
+
+.vol-control { display: flex; align-items: center; gap: 10px; font-size: 0.8rem; }
+input[type=range] { flex: 1; accent-color: var(--primary); }
+
+@keyframes floatCard {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }
+@keyframes blink { 50% { opacity: 0; } }
+@keyframes popUp { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
 @media (max-width: 380px) {
-  .couple-photo-container {
-    width: 100px;
-    height: 100px;
-  }
-  
-  .count-timer {
-    font-size: 1.5rem;
-  }
-}
-
-/* สำหรับแนวนอน (Landscape) บนมือถือ */
-@media (max-height: 500px) {
-  .couple-photo-container {
-    display: none; /* ซ่อนรูปในแนวนอน เพื่อให้เห็นเวลาชัดๆ */
-  }
-  
-  #mainContent {
-    padding-top: 10px;
-    padding-bottom: 60px;
-  }
+    .glass-card { width: 92%; padding: 1.5rem; }
+    .timer-big { font-size: 1.8rem; }
+    .song-name { max-width: 120px; }
 }
