@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>รักนะต้าวอ้วน 💖</title>
     <link href="https://fonts.googleapis.com/css2?family=Itim&family=Mali:wght@400;600&family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -12,55 +12,87 @@
 
     <canvas id="cuteCanvas"></canvas>
 
-    <main class="glass-card">
-        
-        <div class="photo-frame">
-            <div class="sticker-float st-1">🧸</div>
-            <div class="sticker-float st-2">✨</div>
-            <img src="favicon.ico" alt="Our Photo" id="couplePhoto" onerror="this.src='https://placehold.co/400x400/ffb7b2/ffffff?text=Love'">
-        </div>
-
-        <div class="content-area">
-            <h1 class="main-title">Together Forever ☁️</h1>
-            <div class="since-date">Since 17 Oct 2023</div>
+    <div id="loginScreen">
+        <div class="glass-card login-card">
+            <div class="sticker-float st-login">🔐</div>
+            <h2 class="main-title">ความลับ 🤫</h2>
             
-            <div class="timer-container">
-                <div class="timer-display" id="datePart">...</div>
-                <div class="timer-big" id="timePart">00 : 00 : 00</div>
+            <p style="margin-bottom: 15px; color: #666;">
+                จำ <b>"วันสำคัญ"</b> ได้มั้ย?<br>
+                (DD/MM/YYYY)<br>
+            </p>
+            
+            <input type="text" id="passInput" placeholder="วันไหนน้าาา..." class="pass-input" maxlength="10" inputmode="numeric">
+            
+            <div id="attemptMsg" class="attempt-text">โอกาสเหลือ 3 ครั้งนะ!</div>
+            <div id="errorMsg" class="error-text">ผิดอะ... จำไม่ได้หรอ? 🥺</div>
+            
+            <button id="loginBtn" class="cute-btn main login-btn-style">ตอบบ</button>
+        </div>
+    </div>
+
+    <div id="sulkingScreen" style="display: none;">
+        <div class="angry-container">
+            <div class="angry-emoji">😤</div>
+            <h1>งอนนนนนนน!!!</h1>
+            <p>จำวันสำคัญของเราไม่ได้หรอ?</p>
+            <p>ไปง้อเค้าเดี๋ยวนี้เลยนะ!</p>
+            <div class="angry-sticker">💔</div>
+            <button onclick="location.reload()" class="cute-btn sub" style="margin-top: 20px; width: auto; padding: 0 20px; border-radius: 20px;">ขอตอบใหม่ได้มั้ย...</button>
+        </div>
+    </div>
+
+    <div id="mainContent" style="display: none;">
+        <main class="glass-card">
+            
+            <div class="photo-frame">
+                <div class="sticker-float st-1">🧸</div>
+                <div class="sticker-float st-2">✨</div>
+                <img src="favicon.ico" alt="Our Photo" id="couplePhoto" onerror="this.src='https://placehold.co/400x400/ffb7b2/ffffff?text=Love'">
             </div>
 
-            <div class="typing-area">
-                <span id="footerText"></span><span class="cursor">|</span>
+            <div class="content-area">
+                <h1 class="main-title">Together Forever ☁️</h1>
+                <div class="since-date">Since 17 Oct 2023</div>
+                
+                <div class="timer-container">
+                    <div class="timer-display" id="datePart">...</div>
+                    <div class="timer-big" id="timePart">00 : 00 : 00</div>
+                </div>
+
+                <div class="typing-area">
+                    <span id="footerText"></span><span class="cursor">|</span>
+                </div>
             </div>
-        </div>
 
-    </main>
+        </main>
 
-    <div class="player-dock">
-        <div class="player-left">
-            <div class="disc-spin" id="discIcon">💿</div>
-            <div class="song-info">
-                <div class="song-name" id="songTitle">แตะ Play เพื่อเล่นเพลง 🎵</div>
-                <div class="song-status">Music for you</div>
+        <div class="player-dock">
+            <div class="player-left">
+                <div class="disc-spin" id="discIcon">💿</div>
+                <div class="song-info">
+                    <div class="song-name" id="songTitle">แตะ Play เพื่อเล่นเพลง 🎵</div>
+                    <div class="song-status">Music for you</div>
+                </div>
             </div>
-        </div>
-        
-        <div class="player-controls">
-            <button id="playlistBtn" class="cute-btn sub">📂</button>
-            <button id="playBtn" class="cute-btn main">▶</button>
-        </div>
+            
+            <div class="player-controls">
+                <button id="playlistBtn" class="cute-btn sub">📂</button>
+                <button id="playBtn" class="cute-btn main">▶</button>
+            </div>
 
-        <div class="playlist-pop" id="playlistPopup">
-            <div class="pop-header">Playlist ของเรา 🎧</div>
-            <ul id="songListUI">
-                <li data-src="music/1.mp3" class="active">1. เพลงรักเพลงแรก</li>
-                <li data-src="music/2.mp3">2. เพลงที่สองของเรา</li>
-                <li data-src="music/3.mp3">3. อีกสักเพลงนะ</li>
-            </ul>
-            <div class="vol-control">
-                <span>🔈</span>
-                <input type="range" id="volumeSlider" min="0" max="100" value="70">
-                <span>🔊</span>
+            <div class="playlist-pop" id="playlistPopup">
+                <div class="pop-header">Playlist ของเรา 🎧</div>
+                <ul id="songListUI">
+                    <li data-src="music/1.mp3" class="active">1. เพลงรักเพลงแรก</li>
+                    <li data-src="music/2.mp3">2. เพลงที่สองของเรา</li>
+                    <li data-src="music/3.mp3">3. อีกสักเพลงนะ</li>
+                </ul>
+                <div class="vol-control">
+                    <span>🔈</span>
+                    <input type="range" id="volumeSlider" min="0" max="100" value="70">
+                    <span>🔊</span>
+                </div>
             </div>
         </div>
     </div>

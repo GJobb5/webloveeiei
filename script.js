@@ -1,4 +1,90 @@
-const START_DATE = new Date(2023, 9, 17); // 17 ตุลาคม 2023
+const START_DATE = new Date(2023, 9, 17); // 17 ตุลาคม 2023 (เดือนใน JS เริ่มที่ 0)
+
+// --- CONFIG ---
+const ANNIVERSARY_PASS = "17/10/2023"; // รหัสผ่านแบบมี /
+const MAX_ATTEMPTS = 3;
+let failedAttempts = 0;
+
+// --- Elements ---
+const loginScreen = document.getElementById('loginScreen');
+const sulkingScreen = document.getElementById('sulkingScreen');
+const loginBtn = document.getElementById('loginBtn');
+const passInput = document.getElementById('passInput');
+const errorMsg = document.getElementById('errorMsg');
+const attemptMsg = document.getElementById('attemptMsg');
+const mainContent = document.getElementById('mainContent');
+
+// --- Input Formatting (เติม / อัตโนมัติ) ---
+passInput.addEventListener('input', function(e) {
+    // ลบทุกอย่างที่ไม่ใช่ตัวเลขออกก่อน
+    let value = e.target.value.replace(/\D/g, '');
+    
+    // ตัดให้เหลือไม่เกิน 8 ตัวเลข (DDMMYYYY)
+    if (value.length > 8) value = value.slice(0, 8);
+
+    // เติม / ตามตำแหน่ง
+    if (value.length > 4) {
+        value = value.slice(0, 2) + '/' + value.slice(2, 4) + '/' + value.slice(4);
+    } else if (value.length > 2) {
+        value = value.slice(0, 2) + '/' + value.slice(2);
+    }
+    
+    e.target.value = value;
+});
+
+// --- Login Logic ---
+function checkLogin() {
+    const inputVal = passInput.value;
+
+    if (inputVal === ANNIVERSARY_PASS) {
+        // --- Login สำเร็จ ---
+        loginScreen.style.opacity = '0';
+        setTimeout(() => {
+            loginScreen.style.display = 'none';
+            mainContent.style.display = 'flex';
+            
+            playAudio();
+            type();
+        }, 500);
+
+    } else {
+        // --- Login ผิด ---
+        failedAttempts++;
+        let remaining = MAX_ATTEMPTS - failedAttempts;
+        
+        // อนิเมชั่นสั่น
+        const card = document.querySelector('.login-card');
+        card.classList.remove('shake');
+        void card.offsetWidth; // trigger reflow
+        card.classList.add('shake');
+
+        if (failedAttempts >= MAX_ATTEMPTS) {
+            // ผิดครบ 3 ครั้ง -> งอน!
+            setTimeout(() => {
+                loginScreen.style.display = 'none';
+                sulkingScreen.style.display = 'flex';
+            }, 500);
+        } else {
+            // ยังผิดไม่ครบ -> แจ้งเตือน
+            errorMsg.classList.add('show');
+            attemptMsg.innerText = `เหลือโอกาสอีก ${remaining} ครั้งนะ!`;
+            attemptMsg.style.color = '#ff6b6b';
+            passInput.value = '';
+            
+            // ซ่อนข้อความ error เมื่อพิมพ์ใหม่
+            passInput.addEventListener('input', () => {
+                errorMsg.classList.remove('show');
+            }, { once: true });
+        }
+    }
+}
+
+loginBtn.addEventListener('click', checkLogin);
+passInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') checkLogin();
+});
+
+// --- Existing Time & Animation Logic ---
 
 function updateTime() {
     const now = new Date();
@@ -9,7 +95,6 @@ function updateTime() {
     const minutes = Math.floor((diff / (1000 * 60)) % 60);
     const seconds = Math.floor((diff / 1000) % 60);
 
-    // Calculate details
     const years = Math.floor(days / 365);
     const remainingDays = days % 365;
     const months = Math.floor(remainingDays / 30);
@@ -109,12 +194,16 @@ const songListUI = document.querySelectorAll('#songListUI li');
 const songTitle = document.getElementById('songTitle');
 const volSlider = document.getElementById('volumeSlider');
 
+function playAudio() {
+    audio.play().then(() => {
+        playBtn.textContent = "⏸";
+        document.querySelector('.player-dock').classList.add('playing');
+    }).catch((e) => console.log("รอ User interaction เพิ่มเติม"));
+}
+
 playBtn.addEventListener('click', () => {
     if (audio.paused) {
-        audio.play().then(() => {
-            playBtn.textContent = "⏸";
-            document.querySelector('.player-dock').classList.add('playing');
-        }).catch(() => alert("จิ้มหน้าจอทีนึงก่อนนะเตง"));
+        playAudio();
     } else {
         audio.pause();
         playBtn.textContent = "▶";
@@ -133,10 +222,7 @@ songListUI.forEach(li => {
         
         audio.src = li.getAttribute('data-src');
         songTitle.textContent = li.textContent.substring(3);
-        audio.play();
-        
-        playBtn.textContent = "⏸";
-        document.querySelector('.player-dock').classList.add('playing');
+        playAudio();
         playlistPopup.classList.remove('show');
     });
 });
@@ -148,7 +234,6 @@ volSlider.addEventListener('input', (e) => {
 window.onload = function() {
     updateTime();
     setInterval(updateTime, 1000);
-    type();
     initParticles();
     animate();
 };

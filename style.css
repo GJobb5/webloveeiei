@@ -31,6 +31,131 @@ body {
     z-index: -1;
 }
 
+/* --- Login Styles --- */
+#loginScreen {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.pass-input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 20px;
+    border: 2px solid #fff;
+    background: rgba(255,255,255,0.9);
+    font-family: var(--font-body);
+    font-size: 1.4rem; /* ใหญ่ขึ้นกดง่ายในมือถือ */
+    text-align: center;
+    color: var(--primary);
+    outline: none;
+    margin-bottom: 5px;
+    letter-spacing: 2px;
+    transition: all 0.3s;
+}
+
+.pass-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 15px var(--secondary);
+}
+
+.login-btn-style {
+    width: 100% !important;
+    border-radius: 25px !important;
+    font-size: 1.2rem !important;
+    padding: 12px !important;
+    height: auto !important;
+    margin-top: 15px;
+}
+
+.attempt-text {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 5px;
+}
+
+.error-text {
+    color: #ff4757;
+    font-size: 0.95rem;
+    height: 20px;
+    opacity: 0;
+    font-weight: bold;
+    transition: opacity 0.3s;
+}
+.error-text.show { opacity: 1; }
+
+.shake { animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both; }
+
+.st-login {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 3.5rem;
+    animation: bounceLogin 2s infinite; 
+    filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1));
+    z-index: 2;
+}
+
+/* --- Sulking Screen (หน้างอน) --- */
+#sulkingScreen {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: #ff6b6b; /* สีแดงงอน */
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #fff;
+    text-align: center;
+    animation: fadeIn 0.5s;
+}
+
+.angry-container {
+    padding: 20px;
+}
+
+.angry-emoji {
+    font-size: 5rem;
+    animation: shake 2s infinite;
+}
+
+.angry-sticker {
+    font-size: 3rem;
+    margin-top: 20px;
+    animation: floatCard 3s infinite;
+}
+
+#sulkingScreen h1 {
+    font-size: 2.5rem;
+    margin: 10px 0;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+}
+
+#sulkingScreen p {
+    font-size: 1.2rem;
+    font-family: var(--font-body);
+}
+
+/* --- Main Styles --- */
+#mainContent {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 1s ease-in;
+}
+
 .glass-card {
     background: var(--glass-bg);
     backdrop-filter: blur(12px);
@@ -241,9 +366,17 @@ input[type=range] { flex: 1; accent-color: var(--primary); }
 @keyframes spin { 100% { transform: rotate(360deg); } }
 @keyframes blink { 50% { opacity: 0; } }
 @keyframes popUp { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-8px); }
+    20%, 40%, 60%, 80% { transform: translateX(8px); }
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes bounceLogin { 0%, 100% {      transform: translateX(-50%) translateY(0);  } 50% {      transform: translateX(-50%) translateY(-10px);  } }
 
 @media (max-width: 380px) {
     .glass-card { width: 92%; padding: 1.5rem; }
     .timer-big { font-size: 1.8rem; }
     .song-name { max-width: 120px; }
+    .st-login { font-size: 3rem; top: -25px; }
 }
