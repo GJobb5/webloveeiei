@@ -1,6 +1,6 @@
 // --- CONFIG ---
 const START_DATE = new Date(2023, 9, 17); // วันเริ่มต้น
-const END_DATE = new Date();
+const END_DATE = new Date(2026, 0, 9);
 
 const ANNIVERSARY_PASS = "17/10/2023"; // รหัสผ่านเดิม
 const MAX_ATTEMPTS = 3;
