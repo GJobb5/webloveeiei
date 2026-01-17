@@ -16,7 +16,7 @@ const attemptMsg = document.getElementById('attemptMsg');
 const mainContent = document.getElementById('mainContent');
 
 // --- Input Formatting ---
-passInput.addEventListener('input', function(e) {
+passInput.addEventListener('input', function (e) {
     let value = e.target.value.replace(/\D/g, '');
     if (value.length > 8) value = value.slice(0, 8);
     if (value.length > 4) {
@@ -36,7 +36,7 @@ function checkLogin() {
         setTimeout(() => {
             loginScreen.style.display = 'none';
             mainContent.style.display = 'flex';
-            
+
             type();
         }, 500);
     } else {
@@ -44,7 +44,7 @@ function checkLogin() {
         let remaining = MAX_ATTEMPTS - failedAttempts;
         const card = document.querySelector('.login-card');
         card.classList.remove('shake');
-        void card.offsetWidth; 
+        void card.offsetWidth;
         card.classList.add('shake');
 
         if (failedAttempts >= MAX_ATTEMPTS) {
@@ -70,7 +70,7 @@ passInput.addEventListener('keypress', (e) => {
 
 
 function updateTime() {
-    const now = END_DATE; 
+    const now = END_DATE;
     const diff = now - START_DATE;
 
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -89,7 +89,37 @@ function updateTime() {
     }
 
     document.getElementById('datePart').innerText = dateText;
-    document.getElementById('timePart').innerText = 
+    document.getElementById('timePart').innerText =
+        `${pad(hours)} : ${pad(minutes)} : ${pad(seconds)}`;
+}
+
+function updateBreakupTime() {
+    const now = new Date();
+    const diff = now - END_DATE; // Time since breakup
+
+    if (diff < 0) {
+        document.getElementById('breakupDatePart').innerText = "ยังไม่ถึงเวลา...";
+        document.getElementById('breakupTimePart').innerText = "00 : 00 : 00";
+        return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    const years = Math.floor(days / 365);
+    const remainingDays = days % 365;
+    const months = Math.floor(remainingDays / 30);
+    const finalDays = remainingDays % 30;
+
+    let dateText = `${days} DAYS`;
+    if (months > 0 || years > 0) {
+        dateText = `${years > 0 ? years + ' ปี ' : ''}${months} เดือน ${finalDays} วัน`;
+    }
+
+    document.getElementById('breakupDatePart').innerText = dateText;
+    document.getElementById('breakupTimePart').innerText =
         `${pad(hours)} : ${pad(minutes)} : ${pad(seconds)}`;
 }
 
@@ -108,9 +138,9 @@ function type() {
     if (count === texts.length) count = 0;
     currentText = texts[count];
     letter = currentText.slice(0, ++index);
-    
+
     document.getElementById('footerText').textContent = letter;
-    
+
     if (letter.length === currentText.length) {
         count++;
         index = 0;
@@ -214,8 +244,10 @@ volSlider.addEventListener('input', (e) => {
     audio.volume = e.target.value / 100;
 });
 
-window.onload = function() {
-    updateTime(); 
+window.onload = function () {
+    updateTime();
+    updateBreakupTime();
+    setInterval(updateBreakupTime, 1000);
     initParticles();
     animate();
 };

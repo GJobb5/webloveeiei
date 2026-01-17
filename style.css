@@ -5,12 +5,16 @@
     --text-color: #5d4a50;
     --glass-bg: rgba(255, 255, 255, 0.65);
     --glass-border: rgba(255, 255, 255, 0.9);
-    
+
     --font-head: 'Mali', cursive;
     --font-body: 'Itim', cursive;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 body {
     height: 100vh;
@@ -26,16 +30,20 @@ body {
 
 #cuteCanvas {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     z-index: -1;
 }
 
 /* --- Login Styles --- */
 #loginScreen {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -50,9 +58,10 @@ body {
     padding: 15px;
     border-radius: 20px;
     border: 2px solid #fff;
-    background: rgba(255,255,255,0.9);
+    background: rgba(255, 255, 255, 0.9);
     font-family: var(--font-body);
-    font-size: 1.4rem; /* ใหญ่ขึ้นกดง่ายในมือถือ */
+    font-size: 1.4rem;
+    /* ใหญ่ขึ้นกดง่ายในมือถือ */
     text-align: center;
     color: var(--primary);
     outline: none;
@@ -89,9 +98,14 @@ body {
     font-weight: bold;
     transition: opacity 0.3s;
 }
-.error-text.show { opacity: 1; }
 
-.shake { animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both; }
+.error-text.show {
+    opacity: 1;
+}
+
+.shake {
+    animation: shake 0.4s cubic-bezier(.36, .07, .19, .97) both;
+}
 
 .st-login {
     position: absolute;
@@ -99,17 +113,20 @@ body {
     left: 50%;
     transform: translateX(-50%);
     font-size: 3.5rem;
-    animation: bounceLogin 2s infinite; 
-    filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1));
+    animation: bounceLogin 2s infinite;
+    filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.1));
     z-index: 2;
 }
 
 /* --- Sulking Screen (หน้างอน) --- */
 #sulkingScreen {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: #ff6b6b; /* สีแดงงอน */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ff6b6b;
+    /* สีแดงงอน */
     z-index: 9999;
     display: flex;
     justify-content: center;
@@ -138,7 +155,7 @@ body {
 #sulkingScreen h1 {
     font-size: 2.5rem;
     margin: 10px 0;
-    text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
 }
 
 #sulkingScreen p {
@@ -181,11 +198,12 @@ body {
 }
 
 #couplePhoto {
-    width: 100%; height: 100%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     border-radius: 50%;
     border: 6px solid #fff;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .sticker-float {
@@ -194,8 +212,19 @@ body {
     animation: bounce 3s infinite;
     z-index: 2;
 }
-.st-1 { top: -10px; right: -10px; animation-delay: 0s; }
-.st-2 { bottom: 0px; left: -10px; animation-delay: 1.5s; font-size: 1.5rem; }
+
+.st-1 {
+    top: -10px;
+    right: -10px;
+    animation-delay: 0s;
+}
+
+.st-2 {
+    bottom: 0px;
+    left: -10px;
+    animation-delay: 1.5s;
+    font-size: 1.5rem;
+}
 
 .main-title {
     font-size: 1.6rem;
@@ -212,11 +241,11 @@ body {
     font-family: var(--font-body);
     font-size: 1rem;
     margin-bottom: 20px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 .timer-container {
-    background: rgba(255,255,255,0.5);
+    background: rgba(255, 255, 255, 0.5);
     border-radius: 25px;
     padding: 15px;
     border: 2px dashed #fff;
@@ -243,7 +272,9 @@ body {
     color: #666;
 }
 
-.cursor { animation: blink 1s infinite; }
+.cursor {
+    animation: blink 1s infinite;
+}
 
 .player-dock {
     position: fixed;
@@ -258,7 +289,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     z-index: 100;
     border: 2px solid #fff;
 }
@@ -276,7 +307,10 @@ body {
     animation: spin 4s linear infinite;
     animation-play-state: paused;
 }
-.playing .disc-spin { animation-play-state: running; }
+
+.playing .disc-spin {
+    animation-play-state: running;
+}
 
 .song-info {
     display: flex;
@@ -296,7 +330,10 @@ body {
     color: var(--primary);
 }
 
-.player-controls { display: flex; gap: 8px; }
+.player-controls {
+    display: flex;
+    gap: 8px;
+}
 
 .cute-btn {
     border: none;
@@ -310,37 +347,54 @@ body {
 }
 
 .main {
-    width: 45px; height: 45px;
+    width: 45px;
+    height: 45px;
     background: var(--primary);
     color: #fff;
     box-shadow: 0 4px 10px rgba(255, 154, 158, 0.4);
 }
 
 .sub {
-    width: 38px; height: 38px;
+    width: 38px;
+    height: 38px;
     background: #f0f0f0;
     color: #666;
 }
 
-.cute-btn:active { transform: scale(0.9); }
+.cute-btn:active {
+    transform: scale(0.9);
+}
 
 .playlist-pop {
     position: absolute;
     bottom: 75px;
-    left: 0; right: 0;
-    background: rgba(255,255,255,0.95);
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
     border-radius: 20px;
     padding: 15px;
     display: none;
     flex-direction: column;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
     transform-origin: bottom center;
 }
-.playlist-pop.show { display: flex; animation: popUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 
-.pop-header { font-weight: bold; margin-bottom: 10px; color: var(--primary); }
+.playlist-pop.show {
+    display: flex;
+    animation: popUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
 
-ul { list-style: none; margin-bottom: 10px; }
+.pop-header {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--primary);
+}
+
+ul {
+    list-style: none;
+    margin-bottom: 10px;
+}
+
 li {
     padding: 8px 10px;
     border-radius: 10px;
@@ -349,34 +403,147 @@ li {
     margin-bottom: 5px;
     transition: background 0.2s;
 }
-li:hover { background: #fff0f5; }
-li.active { background: var(--secondary); color: #fff; font-weight: bold; }
 
-.vol-control { display: flex; align-items: center; gap: 10px; font-size: 0.8rem; }
-input[type=range] { flex: 1; accent-color: var(--primary); }
+li:hover {
+    background: #fff0f5;
+}
+
+li.active {
+    background: var(--secondary);
+    color: #fff;
+    font-weight: bold;
+}
+
+.vol-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.8rem;
+}
+
+input[type=range] {
+    flex: 1;
+    accent-color: var(--primary);
+}
 
 @keyframes floatCard {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
 }
+
 @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
 }
-@keyframes spin { 100% { transform: rotate(360deg); } }
-@keyframes blink { 50% { opacity: 0; } }
-@keyframes popUp { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+@keyframes popUp {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
 @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    10%, 30%, 50%, 70%, 90% { transform: translateX(-8px); }
-    20%, 40%, 60%, 80% { transform: translateX(8px); }
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: translateX(-8px);
+    }
+
+    20%,
+    40%,
+    60%,
+    80% {
+        transform: translateX(8px);
+    }
 }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes bounceLogin { 0%, 100% {      transform: translateX(-50%) translateY(0);  } 50% {      transform: translateX(-50%) translateY(-10px);  } }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes bounceLogin {
+
+    0%,
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+}
 
 @media (max-width: 380px) {
-    .glass-card { width: 92%; padding: 1.5rem; }
-    .timer-big { font-size: 1.8rem; }
-    .song-name { max-width: 120px; }
-    .st-login { font-size: 3rem; top: -25px; }
+    .glass-card {
+        width: 92%;
+        padding: 1.5rem;
+    }
+
+    .timer-big {
+        font-size: 1.8rem;
+    }
+
+    .song-name {
+        max-width: 120px;
+    }
+
+    .st-login {
+        font-size: 3rem;
+        top: -25px;
+    }
+}
+
+.breakup-timer {
+    background: rgba(255, 235, 235, 0.5);
+    border: 2px dashed #ffb7b2;
+}
+
+.breakup-timer .timer-big {
+    color: #ff6b6b;
 }
